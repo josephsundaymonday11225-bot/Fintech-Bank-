@@ -1,154 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FiBank Signup</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
-<style>
-  body {
-    background: linear-gradient(-45deg, #0ff, #06f, #0ff, #06f);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    font-family: sans-serif;
-  }
+  <meta charset="UTF-8">
+    <title>F Bank - Signup</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Tailwind CSS -->
+          <script src="https://cdn.tailwindcss.com"></script>
+            <!-- Supabase Client -->
+              <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.30.0/dist/supabase.min.js"></script>
+                <style>
+                    /* Futuristic animated background */
+                        body {
+                              background: radial-gradient(circle at center, #5a0bc0, #1e3c72);
+                                    animation: backgroundShift 10s infinite alternate;
+                                        }
+                                            @keyframes backgroundShift {
+                                                  0% { background-position: 0% 50%; }
+                                                        50% { background-position: 100% 50%; }
+                                                              100% { background-position: 0% 50%; }
+                                                                  }
+                                                                    </style>
+                                                                    </head>
+                                                                    <body class="min-h-screen flex items-center justify-center font-sans">
 
-  @keyframes gradientBG {
-    0% {background-position:0% 50%}
-    50% {background-position:100% 50%}
-    100% {background-position:0% 50%}
-  }
+                                                                      <div class="bg-black/80 backdrop-blur-md text-white rounded-2xl p-8 shadow-lg w-full max-w-md border border-purple-500">
+                                                                          <h2 class="text-3xl font-bold mb-6 text-center text-purple-400 tracking-widest animate-pulse">F BANK</h2>
 
-  .neonText {
-    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #06f;
-  }
+                                                                              <form id="signupForm" class="flex flex-col gap-4">
+                                                                                    <input type="text" id="fullName" placeholder="Full Name" class="p-3 rounded border border-purple-600 bg-black/50" required />
+                                                                                          <input type="email" id="email" placeholder="Email" class="p-3 rounded border border-purple-600 bg-black/50" required />
+                                                                                                <input type="text" id="phone" placeholder="Phone" class="p-3 rounded border border-purple-600 bg-black/50" required />
+                                                                                                      <input type="password" id="password" placeholder="Password (min 8 chars)" class="p-3 rounded border border-purple-600 bg-black/50" required minlength="8" />
+                                                                                                            <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded tracking-wide uppercase font-semibold transition duration-300">Sign Up</button>
+                                                                                                                </form>
 
-  /* Logo bounce */
-  @keyframes logoBounce {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.2) rotate(10deg); }
-  }
-  .logoAnim {
-    animation: logoBounce 2s infinite;
-  }
-</style>
-</head>
-<body class="flex items-center justify-center min-h-screen">
+                                                                                                                    <p class="mt-4 text-sm text-center text-purple-400">Already have an account? <a href="login.html" class="underline">Sign In</a></p>
 
-<div class="bg-black/70 p-8 rounded-xl shadow-xl w-full max-w-md text-white">
+                                                                                                                        <div id="loading" class="hidden mt-4 text-center text-purple-300">Processing...</div>
+                                                                                                                          </div>
 
-  <!-- Logo -->
-  <div class="flex justify-center items-center mb-6">
-    <div class="w-16 h-16 bg-cyan-400 rounded-full flex items-center justify-center logoAnim">
-      <span class="text-black font-bold text-3xl">F</span>
-    </div>
-    <svg class="w-12 h-12 text-cyan-400 logoAnim" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="currentColor">
-      <path d="M32 2 L42 22 H22 L32 2 Z M12 42 L52 42 L42 22 H22 L12 42 Z M32 62 L42 42 H22 L32 62 Z"/>
-    </svg>
-  </div>
+                                                                                                                            <script>
+                                                                                                                                // Supabase Setup
+                                                                                                                                    const supabaseUrl = "https://hfdnfdkrzjfixfascaxq.supabase.co";
+                                                                                                                                        const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhmZG5mZGtyempmaXhmYXNjYXhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMxNjkyMDgsImV4cCI6MjA3ODc0NTIwOH0.WzVL4LwjwfmDmD2dUUZpd572qx5Dh4XJs8l_ovFM4Cc";
+                                                                                                                                            const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
 
-  <h1 class="text-3xl font-bold text-center mb-4 neonText">Create Account</h1>
-  <p class="text-cyan-200 text-center mb-6">Join FiBank and start your futuristic banking experience.</p>
+                                                                                                                                                function generateAccountNumber() {
+                                                                                                                                                      const base = Array.from({ length: 9 }, () => Math.floor(Math.random() * 10)).join("");
+                                                                                                                                                            const sum = base.split("").reduce((s, d) => s + Number(d), 0);
+                                                                                                                                                                  const checksum = sum % 10;
+                                                                                                                                                                        return `${base}${checksum}`;
+                                                                                                                                                                            }
 
-  <form id="signupForm" class="space-y-4">
+                                                                                                                                                                                const form = document.getElementById("signupForm");
+                                                                                                                                                                                    const loading = document.getElementById("loading");
 
-    <div>
-      <label class="block text-sm font-medium">Full Name</label>
-      <input type="text" id="fullName" class="w-full p-2 rounded-md text-black" required>
-    </div>
+                                                                                                                                                                                        form.addEventListener("submit", async (e) => {
+                                                                                                                                                                                              e.preventDefault();
+                                                                                                                                                                                                    loading.classList.remove("hidden");
 
-    <div>
-      <label class="block text-sm font-medium">Phone Number</label>
-      <input type="tel" id="phone" class="w-full p-2 rounded-md text-black" required>
-    </div>
+                                                                                                                                                                                                          const full_name = document.getElementById("fullName").value.trim();
+                                                                                                                                                                                                                const email = document.getElementById("email").value.trim();
+                                                                                                                                                                                                                      const phone = document.getElementById("phone").value.trim();
+                                                                                                                                                                                                                            const password = document.getElementById("password").value;
 
-    <div>
-      <label class="block text-sm font-medium">Email</label>
-      <input type="email" id="email" class="w-full p-2 rounded-md text-black" required>
-    </div>
+                                                                                                                                                                                                                                  if (password.length < 8) {
+                                                                                                                                                                                                                                          alert("Password must be at least 8 characters!");
+                                                                                                                                                                                                                                                  loading.classList.add("hidden");
+                                                                                                                                                                                                                                                          return;
+                                                                                                                                                                                                                                                                }
 
-    <div>
-      <label class="block text-sm font-medium">Password (min 8 characters)</label>
-      <input type="password" id="password" class="w-full p-2 rounded-md text-black" minlength="8" required>
-    </div>
+                                                                                                                                                                                                                                                                      const account_number = generateAccountNumber();
+                                                                                                                                                                                                                                                                            const balance = 0;
 
-    <button type="submit" class="w-full py-2 bg-cyan-400 text-black rounded-md font-bold hover:bg-cyan-500 transition">Sign Up</button>
-  </form>
+                                                                                                                                                                                                                                                                                  const { data, error } = await supabase.from("users").insert([{
+                                                                                                                                                                                                                                                                                          full_name,
+                                                                                                                                                                                                                                                                                                  email,
+                                                                                                                                                                                                                                                                                                          phone,
+                                                                                                                                                                                                                                                                                                                  password,
+                                                                                                                                                                                                                                                                                                                          account_number,
+                                                                                                                                                                                                                                                                                                                                  balance
+                                                                                                                                                                                                                                                                                                                                        }]).select().single();
 
-  <p class="text-center text-sm text-cyan-200 mt-4">
-    Already have an account? <a href="login.html" class="text-white hover:underline">Sign In</a>
-  </p>
+                                                                                                                                                                                                                                                                                                                                              if (error) {
+                                                                                                                                                                                                                                                                                                                                                      alert("Signup failed: " + error.message);
+                                                                                                                                                                                                                                                                                                                                                              console.error(error);
+                                                                                                                                                                                                                                                                                                                                                                      loading.classList.add("hidden");
+                                                                                                                                                                                                                                                                                                                                                                              return;
+                                                                                                                                                                                                                                                                                                                                                                                    }
 
-  <div id="message" class="mt-4 text-center"></div>
+                                                                                                                                                                                                                                                                                                                                                                                          // Save user to localStorage
+                                                                                                                                                                                                                                                                                                                                                                                                localStorage.setItem("currentUser", JSON.stringify(data));
 
-</div>
-
-<script>
-  const supabaseUrl = "https://hfdnfdkrzjfixfascaxq.supabase.co";
-  const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhmZG5mZGtyempmaXhmYXNjYXhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMxNjkyMDgsImV4cCI6MjA3ODc0NTIwOH0.WzVL4LwjwfmDmD2dUUZpd572qx5Dh4XJs8l_ovFM4Cc";
-  const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
-
-  function generateAccountNumber() {
-    const base = Array.from({ length: 9 }, () => Math.floor(Math.random() * 10)).join("");
-    const sum = base.split("").reduce((s,d) => s + Number(d), 0);
-    const checksum = sum % 10;
-    return `${base}${checksum}`;
-  }
-
-  const form = document.getElementById('signupForm');
-  const messageDiv = document.getElementById('message');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    messageDiv.textContent = "";
-    
-    const fullName = document.getElementById('fullName').value;
-    const phone = document.getElementById('phone').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const accountNumber = generateAccountNumber();
-    const balance = 0;
-
-    try {
-      // Create user in Supabase Auth
-      const { data, error: authError } = await supabase.auth.signUp({
-        email,
-        password
-      });
-
-      if(authError) {
-        messageDiv.textContent = authError.message;
-        messageDiv.classList.add('text-red-600');
-        return;
-      }
-
-      // Insert user info into 'users' table
-      const { error: dbError } = await supabase
-        .from('users')
-        .insert([{ name: fullName, email, phone, account_number: accountNumber, balance }]);
-
-      if(dbError) {
-        messageDiv.textContent = dbError.message;
-        messageDiv.classList.add('text-red-600');
-        return;
-      }
-
-      messageDiv.textContent = "Signup successful! Redirecting to login...";
-      messageDiv.classList.remove('text-red-600');
-      messageDiv.classList.add('text-green-500');
-
-      setTimeout(() => {
-        window.location.href = "login.html";
-      }, 1500);
-
-    } catch(err) {
-      console.error(err);
-      messageDiv.textContent = "Unexpected error occurred.";
-      messageDiv.classList.add('text-red-600');
-    }
-  });
-</script>
-
-</body>
-</html>
+                                                                                                                                                                                                                                                                                                                                                                                                      // Redirect to homepage
+                                                                                                                                                                                                                                                                                                                                                                                                            window.location.href = "FintechHomePage.html";
+                                                                                                                                                                                                                                                                                                                                                                                                                });
+                                                                                                                                                                                                                                                                                                                                                                                                                  </script>
+                                                                                                                                                                                                                                                                                                                                                                                                                  </body>
+                                                                                                                                                                                                                                                                                                                                                                                                                  </html>
