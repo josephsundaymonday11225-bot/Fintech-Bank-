@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FiBank - Futuristic Banking</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* Animated background gradient */
+    body {
+        background: linear-gradient(-45deg, #0ff, #06f, #0ff, #06f);
+            background-size: 400% 400%;
+                animation: gradientBG 15s ease infinite;
+                  }
+
+                    @keyframes gradientBG {
+                        0% {background-position:0% 50%}
+                            50% {background-position:100% 50%}
+                                100% {background-position:0% 50%}
+                                  }
+
+                                    /* Loading screen */
+                                      #loadingScreen {
+                                          position: fixed;
+                                              inset: 0;
+                                                  background-color: #000;
+                                                      display: flex;
+                                                          justify-content: center;
+                                                              align-items: center;
+                                                                  z-index: 50;
+                                                                      flex-direction: column;
+                                                                        }
+
+                                                                          /* Futuristic glow text */
+                                                                            .neonText {
+                                                                                text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #06f;
+                                                                                  }
+
+                                                                                    /* Logo animation */
+                                                                                      @keyframes logoBounce {
+                                                                                          0%,100% { transform: scale(1); }
+                                                                                              50% { transform: scale(1.2) rotate(10deg); }
+                                                                                                }
+                                                                                                  .logoAnim {
+                                                                                                      animation: logoBounce 2s infinite;
+                                                                                                        }
+                                                                                                        </style>
+                                                                                                        </head>
+                                                                                                        <body class="font-sans text-white overflow-x-hidden relative">
+
+                                                                                                        <!-- Loading Screen -->
+                                                                                                        <div id="loadingScreen">
+                                                                                                          <svg class="w-24 h-24 animate-spin text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v4m0 8v4m8-8h-4M4 12H0" />
+                                                                                                                </svg>
+                                                                                                                  <p class="mt-4 neonText text-lg font-bold">FiBank Loading...</p>
+                                                                                                                  </div>
+
+                                                                                                                  <!-- Main Content -->
+                                                                                                                  <div id="mainContent" class="hidden">
+
+                                                                                                                    <!-- Hero Section -->
+                                                                                                                      <section class="flex flex-col items-center justify-center text-center min-h-screen px-6">
+                                                                                                                          <!-- Logo -->
+                                                                                                                              <div class="flex items-center gap-4 mb-6">
+                                                                                                                                    <div class="w-16 h-16 bg-cyan-400 rounded-full flex items-center justify-center logoAnim">
+                                                                                                                                            <span class="text-black font-bold text-3xl">F</span>
+                                                                                                                                                  </div>
+                                                                                                                                                        <svg class="w-12 h-12 text-cyan-400 logoAnim" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="currentColor">
+                                                                                                                                                                <path d="M32 2 L42 22 H22 L32 2 Z M12 42 L52 42 L42 22 H22 L12 42 Z M32 62 L42 42 H22 L32 62 Z"/>
+                                                                                                                                                                      </svg>
+                                                                                                                                                                          </div>
+
+                                                                                                                                                                              <h1 class="text-5xl md:text-6xl font-extrabold mb-4 neonText">Fast. Secure. Smart Banking.</h1>
+                                                                                                                                                                                  <p class="text-cyan-200 text-lg mb-8">Experience instant transfers, real-time notifications, and futuristic digital banking at your fingertips.</p>
+
+                                                                                                                                                                                      <!-- Buttons -->
+                                                                                                                                                                                          <div class="flex flex-wrap justify-center gap-4">
+                                                                                                                                                                                                <a href="signup.html" class="px-6 py-3 bg-cyan-400 text-black rounded-md shadow-lg hover:bg-cyan-500 transition">Sign Up</a>
+                                                                                                                                                                                                      <a href="login.html" class="px-6 py-3 border border-cyan-400 rounded-md text-cyan-400 hover:bg-cyan-400 hover:text-black transition">Sign In</a>
+                                                                                                                                                                                                            <a href="services.html" class="px-6 py-3 border border-cyan-300 rounded-md text-cyan-300 hover:bg-cyan-300 hover:text-black transition">Our Services</a>
+                                                                                                                                                                                                                  <a href="about.html" class="px-6 py-3 border border-cyan-300 rounded-md text-cyan-300 hover:bg-cyan-300 hover:text-black transition">About Us</a>
+                                                                                                                                                                                                                        <a href="contact.html" class="px-6 py-3 border border-cyan-300 rounded-md text-cyan-300 hover:bg-cyan-300 hover:text-black transition">Contact Info</a>
+                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                              </section>
+
+                                                                                                                                                                                                                                <!-- Features Section -->
+                                                                                                                                                                                                                                  <section class="px-6 py-12 grid md:grid-cols-3 gap-6">
+                                                                                                                                                                                                                                      <div class="bg-white/10 p-6 rounded-xl shadow-lg hover:scale-105 transition transform">
+                                                                                                                                                                                                                                            <h3 class="text-xl font-bold neonText mb-2">Instant Transfers</h3>
+                                                                                                                                                                                                                                                  <p>Send and receive money in seconds with secure rails and real-time confirmation.</p>
+                                                                                                                                                                                                                                                      </div>
+                                                                                                                                                                                                                                                          <div class="bg-white/10 p-6 rounded-xl shadow-lg hover:scale-105 transition transform">
+                                                                                                                                                                                                                                                                <h3 class="text-xl font-bold neonText mb-2">Real-time Notifications</h3>
+                                                                                                                                                                                                                                                                      <p>Always stay updated with instant alerts for transactions and activities.</p>
+                                                                                                                                                                                                                                                                          </div>
+                                                                                                                                                                                                                                                                              <div class="bg-white/10 p-6 rounded-xl shadow-lg hover:scale-105 transition transform">
+                                                                                                                                                                                                                                                                                    <h3 class="text-xl font-bold neonText mb-2">Airtime & Data</h3>
+                                                                                                                                                                                                                                                                                          <p>Purchase mobile airtime and data bundles instantly from your dashboard.</p>
+                                                                                                                                                                                                                                                                                              </div>
+                                                                                                                                                                                                                                                                                                </section>
+
+                                                                                                                                                                                                                                                                                                  <!-- Footer -->
+                                                                                                                                                                                                                                                                                                    <footer class="py-6 text-center text-slate-300">
+                                                                                                                                                                                                                                                                                                        © 2025 FiBank — All rights reserved
+                                                                                                                                                                                                                                                                                                          </footer>
+
+                                                                                                                                                                                                                                                                                                          </div>
+
+                                                                                                                                                                                                                                                                                                          <script>
+                                                                                                                                                                                                                                                                                                            // Simple loading screen timeout
+                                                                                                                                                                                                                                                                                                              window.addEventListener('load', () => {
+                                                                                                                                                                                                                                                                                                                  setTimeout(() => {
+                                                                                                                                                                                                                                                                                                                        document.getElementById('loadingScreen').style.display = 'none';
+                                                                                                                                                                                                                                                                                                                              document.getElementById('mainContent').classList.remove('hidden');
+                                                                                                                                                                                                                                                                                                                                  }, 2000); // 2-second loading screen
+                                                                                                                                                                                                                                                                                                                                    });
+                                                                                                                                                                                                                                                                                                                                    </script>
+
+                                                                                                                                                                                                                                                                                                                                    </body>
+                                                                                                                                                                                                                                                                                                                                    </html>
